@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Academy | مشغل الكورسات التفاعلي</title>
+    <meta name="description" content="مشغل الكورسات التفاعلي الفاخر من Aether Academy. شاهد دروسك، تتبع تقدمك، واجتاز الاختبارات.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="course-player-v2.css">
+</head>
+<body class="player-body">
+
+    <!-- Premium Loader -->
+    <div id="loader" class="loader-container">
+        <div class="loader-content">
+            <div class="loader-logo"><i data-lucide="graduation-cap"></i> ET3ALAMT PLAYER</div>
+            <div class="loader-bar-container">
+                <div class="loader-bar"></div>
+            </div>
+            <div class="loader-text">جاري تحضير بيئة التعلم...</div>
+        </div>
+    </div>
+
+    <!-- Background Components -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar player-navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="nav-right-stack">
+                <a href="index.html" class="btn btn-secondary back-btn magnetic">
+                    <i data-lucide="arrow-right" class="btn-icon"></i>
+                    <span>العودة للرئيسية</span>
+                </a>
+                <a href="index.html" class="logo nav-player-logo">
+                    <i data-lucide="graduation-cap" class="logo-symbol"></i>
+                    <span class="logo-text">ET3ALAMT</span>
+                </a>
+                <div class="nav-course-title-badge">
+                    <span>تأسيس البرمجة الشامل</span>
+                </div>
+            </div>
+            
+            <div class="nav-left-actions">
+                <div class="header-progress-indicator">
+                    <span class="progress-lbl">الإنجاز الكلي:</span>
+                    <span class="progress-val glow-cyan" id="header-progress-percent">0%</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <main class="player-workspace">
+        <div class="container player-grid">
+            
+            <!-- Left Side: Main Video & Tabs Info -->
+            <div class="player-main-content">
+                
+                <!-- Main Video Box -->
+                <div class="glass-card video-card-container">
+                    <div class="card-border-glow"></div>
+                    <div class="video-ratio-box">
+                        <iframe id="main-video-iframe" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <div class="video-placeholder-overlay" id="video-placeholder">
+                            <div class="placeholder-content">
+                                <i data-lucide="play-circle" class="placeholder-icon"></i>
+                                <h3>اختر درساً للبدء في المشاهدة</h3>
+                                <p>اضغط على أي درس من القائمة الجانبية لبدء تشغيل الفيديو.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="video-details-bar">
+                        <div class="details-text-group">
+                            <span class="lesson-num-badge" id="lesson-number-display">الدرس 00</span>
+                            <h2 class="lesson-title" id="lesson-title-display">اختر درساً من القائمة</h2>
+                            <p class="channel-name" id="lesson-channel-display">اسم القناة التعليمية</p>
+                        </div>
+                        <button class="btn btn-secondary mark-complete-btn magnetic" id="btn-mark-watched">
+                            <i data-lucide="check-circle" class="btn-icon"></i>
+                            <span>تحديد كمكتمل</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Details Tabs Container -->
+                <div class="glass-card tabs-card-container">
+                    <div class="card-border-glow"></div>
+                    
+                    <div class="tabs-header-row">
+                        <button class="tab-btn active" data-tab="about">
+                            <i data-lucide="info" class="tab-icon"></i>
+                            <span>تفاصيل الدرس</span>
+                        </button>
+                        <button class="tab-btn" data-tab="plan">
+                            <i data-lucide="calendar" class="tab-icon"></i>
+                            <span>خطة الـ 30 يوماً</span>
+                        </button>
+                        <button class="tab-btn" data-tab="exams">
+                            <i data-lucide="award" class="tab-icon"></i>
+                            <span>الاختبارات التفاعلية</span>
+                        </button>
+                        <button class="tab-btn" data-tab="project">
+                            <i data-lucide="code" class="tab-icon"></i>
+                            <span>المشروع النهائي</span>
+                        </button>
+                    </div>
+
+                    <div class="tabs-body-content">
+                        
+                        <!-- TAB 1: ABOUT LESSON -->
+                        <div class="tab-panel active" id="tab-panel-about">
+                            <div class="lesson-details-panel">
+                                <div class="details-section">
+                                    <h3>💡 سبب اختيار هذا الفيديو</h3>
+                                    <p id="lesson-reason-display">يرجى تحديد درس لعرض تفاصيل سبب اختياره وأهميته للمبتدئ.</p>
+                                </div>
+                                <div class="details-section">
+                                    <h3>🎯 المهارات المكتسبة</h3>
+                                    <ul class="skills-list" id="lesson-skills-display">
+                                        <li>اختر درساً لمشاهدة المهارات التي ستكتسبها بعد إكماله.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB 2: 30-DAY PLAN -->
+                        <div class="tab-panel" id="tab-panel-plan">
+                            <div class="plan-tab-intro">
+                                <h3>📅 جدول الدراسة الذاتي المقترح (30 يوماً)</h3>
+                                <p>قمنا بتنظيم الدروس الـ 30 على مدار 30 يوماً متتالياً بمعدل درس واحد يومياً لضمان الفهم الجيد والاستمرارية دون إرهاق.</p>
+                            </div>
+                            <div class="study-plan-grid" id="study-plan-grid">
+                                <!-- Days will be generated dynamically by JS -->
+                            </div>
+                        </div>
+
+                        <!-- TAB 3: QUIZZES AND EXAMS -->
+                        <div class="tab-panel" id="tab-panel-exams">
+                            <div class="exams-intro-row">
+                                <div class="intro-left">
+                                    <h3>📝 اختبارات قياس المستوى التراكمية</h3>
+                                    <p>يحتوي المسار على 6 اختبارات تفاعلية. يُفتح اختبار جديد تلقائياً بعد كل 5 دروس لتتأكد من استيعابك الكامل للمفاهيم الأساسية قبل التقدم.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="exams-list-container" id="exams-list-container">
+                                <!-- Quizzes cards will be generated here -->
+                            </div>
+                        </div>
+
+                        <!-- TAB 4: FINAL PROJECT -->
+                        <div class="tab-panel" id="tab-panel-project">
+                            <div class="final-project-wrapper">
+                                <div class="project-header-row">
+                                    <div class="project-title-stack">
+                                        <span class="project-tag">المستوى التأسيسي</span>
+                                        <h2>🏆 مشروع التخرج: نظام إدارة المهام والمعدلات الذكي (Task & Grades Engine)</h2>
+                                    </div>
+                                    <i data-lucide="trophy" class="project-main-icon"></i>
+                                </div>
+                                
+                                <p class="project-intro-p">
+                                    المشروع النهائي هو تتويج لكل ما تعلمته في المسار من هياكل بيانات، منطق برمجي، دوال، والتعامل مع الملفات. ستقوم ببناء تطبيق برمجي يعمل عبر سطر الأوامر (أو واجهة ويب بسيطة) لإدارة المهام الدراسية وحساب معدلات الطلاب مع حفظ البيانات في ملفات خارجية.
+                                </p>
+                                
+                                <div class="project-details-grid">
+                                    <div class="project-section-card">
+                                        <h4><i data-lucide="check-square" class="card-sec-icon"></i> الميزات المطلوبة:</h4>
+                                        <ul>
+                                            <li>تسجيل دخول مستخدم وحفظ بياناته.</li>
+                                            <li>إضافة مهام دراسية مع تحديد مواعيدها وحالتها (مكتملة/غير مكتملة).</li>
+                                            <li>إدخال درجات المواد المختلفة وحساب المعدل التراكمي ونسب النجاح والرسوب.</li>
+                                            <li>تخزين وقراءة البيانات من ملف نصي أو JSON لضمان بقائها بعد إغلاق البرنامج.</li>
+                                            <li>واجهة تفاعلية بسيطة تعتمد على مدخلات المستخدم (Menus & Inputs).</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="project-section-card">
+                                        <h4><i data-lucide="layers" class="card-sec-icon"></i> المفاهيم المستخدمة:</h4>
+                                        <ul>
+                                            <li>**المتغيرات وأنواع البيانات**: لتخزين درجات المواد وأسماء المهام.</li>
+                                            <li>**الهياكل الشرطية والتكرار**: لعرض القوائم وفحص شروط النجاح والخيارات.</li>
+                                            <li>**الدوال (Functions)**: لتقسيم العمليات (حساب المعدل، قراءة الملف، كتابة المهمة).</li>
+                                            <li>**المصفوفات/القوائم**: لحفظ مجموعة المهام والدرجات المتعددة.</li>
+                                            <li>**التعامل مع الملفات**: لحفظ البيانات واسترجاعها تلقائياً.</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="project-submission-box">
+                                    <div class="sub-alert">
+                                        <i data-lucide="git-branch" class="sub-alert-icon"></i>
+                                        <div>
+                                            <strong>طريقة التسليم البرمجية:</strong>
+                                            <p>قم برفع المشروع على مستودع GitHub خاص بك، وتأكد من كتابة ملف README يوضح طريقة التشغيل ومميزات البرنامج، ثم شارك الرابط مع زملائك أو أضفه لمعرض أعمالك التقنية!</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Side: Circular Progress Card & Playlist Accordion -->
+            <aside class="player-sidebar">
+                
+                <!-- Circular Progress Card -->
+                <div class="glass-card progress-card">
+                    <div class="card-border-glow"></div>
+                    <div class="progress-flex-row">
+                        <div class="radial-progress-wrapper">
+                            <svg class="radial-progress-svg" viewBox="0 0 100 100">
+                                <defs>
+                                    <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#8B5CF6" />
+                                        <stop offset="100%" stop-color="#EC4899" />
+                                    </linearGradient>
+                                </defs>
+                                <circle class="progress-ring-bg" cx="50" cy="50" r="40" />
+                                <circle class="progress-ring-fill" id="sidebar-progress-ring" cx="50" cy="50" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2" stroke="url(#ring-gradient)" />
+                            </svg>
+                            <span class="radial-progress-number" id="sidebar-progress-text">0%</span>
+                        </div>
+                        <div class="progress-text-stack">
+                            <h4>تقدمك في المسار</h4>
+                            <p id="progress-lessons-count">أنجزت 0 من 30 درساً</p>
+                            <div class="mini-progress-track">
+                                <div class="mini-progress-fill" id="sidebar-progress-bar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Playlist Accordion Modules Container -->
+                <div class="playlist-accordion-container" id="playlist-container">
+                    <!-- Modules and Lessons will be injected by JavaScript -->
+                </div>
+
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- Dynamic Popup Modal for Exams -->
+    <div class="modal-overlay" id="exam-modal">
+        <div class="glass-card modal-card">
+            <div class="card-border-glow"></div>
+            <button class="modal-close-btn" id="btn-close-modal">×</button>
+            
+            <div class="modal-header">
+                <span class="modal-badge">اختبار تفاعلي</span>
+                <h3 id="modal-exam-title">اسم الاختبار التراكمي</h3>
+                <p id="modal-exam-desc">أجب عن الأسئلة التالية لقياس مدى فهمك للدروس السابقة.</p>
+            </div>
+
+            <div class="modal-body" id="modal-quiz-body">
+                <!-- Quiz questions will be generated here -->
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary magnetic" id="btn-submit-quiz">
+                    <span>تقديم الإجابات</span>
+                    <span class="btn-glow"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Lucide Icons (Specific version to support brand icons like Twitter/GitHub) -->
+    <script src="https://unpkg.com/lucide@0.292.0"></script>
+    <!-- Firebase App & Auth compat JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <!-- Core course logic -->
+    <script src="course-player.js?v=5"></script>
+
+</body>
+</html>
