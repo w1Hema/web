@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="nav_title">Aether Academy | The Premium Future Learning Platform</title>
+    <meta name="description" content="اكتشف Aether Academy، منصة تعليمية مستقبلية فاخرة معتمدة على التصميم المظلم ثلاثي الأبعاد والأنيميشن الاحترافي.">
+    <meta name="keywords" content="منصة تعليمية, ذكاء اصطناعي, شبكات, برمجة, دورات تقنية, تصميم فاخر UI">
+    <meta name="author" content="Aether Academy">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Aether Academy | منصة التعليم المستقبلية">
+    <meta property="og:description" content="منصة تعليمية مستقبلية فاخرة بنظام جزيئات 3D تفاعلي وأنيميشن راقٍ.">
+    <meta property="og:image" content="assets/ai_course.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Premium Loader -->
+    <div id="loader" class="loader-container">
+        <div class="loader-content">
+            <div class="loader-logo">
+                <i data-lucide="graduation-cap" class="loader-icon" style="display:inline-block; margin-right: 10px; color: #06b6d4;"></i>
+                ET3ALAMT
+            </div>
+            <div class="loader-bar-container">
+                <div class="loader-bar"></div>
+            </div>
+            <div class="loader-text">Configuring Plexus Node...</div>
+        </div>
+    </div>
+
+    <!-- Background Components -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navbar -->
+    <header class="navbar" id="navbar">
+        <div class="navbar-container">
+            <a href="#" class="logo" id="nav-logo">
+                <i data-lucide="graduation-cap" class="logo-symbol"></i>
+                <span class="logo-text">ET3ALAMT</span>
+            </a>
+            
+            <nav class="nav-links" id="nav-links">
+                <a href="#hero" class="nav-link active" data-i18n="nav_home">Home</a>
+                <a href="#categories" class="nav-link" data-i18n="nav_categories">Categories</a>
+                <a href="#courses" class="nav-link" data-i18n="nav_courses">Courses</a>
+                <a href="#testimonials" class="nav-link" data-i18n="nav_reviews">Reviews</a>
+                <a href="#faq" class="nav-link" data-i18n="nav_faq">FAQ</a>
+            </nav>
+
+            <div class="nav-actions">
+                <!-- Theme Toggle -->
+                <button class="btn-icon theme-toggle" id="theme-toggle" aria-label="Toggle Theme">
+                    <i data-lucide="sun" class="sun-icon"></i>
+                    <i data-lucide="moon" class="moon-icon" style="display:none;"></i>
+                </button>
+                
+                <!-- Language Switcher -->
+                <div class="lang-switcher">
+                    <button class="btn-icon lang-btn" id="lang-btn">
+                        <i data-lucide="globe"></i> <span id="current-lang">EN</span>
+                    </button>
+                    <div class="lang-dropdown" id="lang-dropdown">
+                        <div class="lang-option" data-lang="en">English</div>
+                        <div class="lang-option" data-lang="ar">العربية</div>
+                        <div class="lang-option" data-lang="fr">Français</div>
+                    </div>
+                </div>
+
+                <a href="#courses" class="btn btn-secondary nav-btn-hide" data-i18n="nav_browse">Browse Paths</a>
+                <a href="#courses" class="btn btn-primary magnetic" id="nav-cta">
+                    <span data-i18n="nav_start">Start Now</span>
+                    <span class="btn-glow"></span>
+                </a>
+
+                <!-- Nav User Profile Badge -->
+                <div class="nav-user-profile" id="nav-user-profile" style="display: none;">
+                    <div class="nav-user-avatar" id="nav-user-avatar">U</div>
+                    <span class="nav-user-name" id="nav-user-name">Username</span>
+                    <div class="nav-user-dropdown">
+                        <a href="#" class="nav-user-dropdown-item" id="nav-logout-btn">
+                            <i data-lucide="log-out"></i>
+                            <span data-i18n="auth_logout">Log Out</span>
+                        </a>
+                    </div>
+                </div>
+
+                <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Dropdown Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-inner">
+            <a href="#hero" class="mobile-link">الرئيسية</a>
+            <a href="#categories" class="mobile-link">المجالات</a>
+            <a href="#courses" class="mobile-link">الكورسات</a>
+            <a href="#testimonials" class="mobile-link">الآراء</a>
+            <a href="#faq" class="mobile-link">الأسئلة الشائعة</a>
+             <div class="mobile-menu-actions">
+                <a href="#" class="btn btn-primary btn-full" id="mobile-nav-cta">ابدأ الآن / Start Now</a>
+                <a href="#" class="btn btn-secondary btn-full" id="mobile-nav-logout" style="display: none; border-color: rgba(239,68,68,0.3); color: #f87171;">تسجيل الخروج / Log Out</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main>
+        
+        <!-- Hero Section -->
+        <section class="section hero-section" id="hero">
+            <div class="container hero-container">
+                <div class="hero-info">
+                    <div class="badge fade-up">
+                        <span class="badge-dot"></span>
+                        <span class="badge-text" data-i18n="hero_badge">Next Generation Learning Experience</span>
+                    </div>
+                    <h1 class="hero-title fade-up">
+                        <span data-i18n="hero_title_1">Unleash your journey into the world of</span> <span class="gradient-text animated-gradient" data-i18n="hero_title_2">Future Knowledge</span>
+                    </h1>
+                    <p class="hero-subtitle fade-up" data-i18n="hero_subtitle">
+                        A premium interactive learning environment enhanced with 3D interactive spaces, cutting-edge curricula, and guidance from top tech experts.
+                    </p>
+                    <div class="hero-actions fade-up">
+                        <a href="#courses" class="btn btn-primary btn-large magnetic">
+                            <span data-i18n="hero_btn_discover">Discover Courses</span>
+                            <span class="btn-glow"></span>
+                        </a>
+                        <a href="#testimonials" class="btn btn-secondary btn-large btn-video">
+                            <span class="pulse-play-ring"></span>
+                            <i data-lucide="play" class="btn-icon"></i>
+                            <span data-i18n="hero_btn_demo">Interactive Demo</span>
+                        </a>
+                    </div>
+                    <div class="hero-features fade-up">
+                        <div class="hero-feature-item">
+                            <i data-lucide="shield-check" class="feature-icon"></i>
+                            <span data-i18n="hero_feature_1">Certified Paths</span>
+                        </div>
+                        <div class="hero-feature-item">
+                            <i data-lucide="zap" class="feature-icon"></i>
+                            <span data-i18n="hero_feature_2">Interactive Labs</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Hero Graphic Stack -->
+                <div class="hero-visual fade-up">
+                    <div class="hero-card-stack">
+                        
+                        <!-- Floating Glassmorphic Main Card -->
+                        <div class="glass-card main-card float-anim-1 interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="card-glow-element"></div>
+                            
+                            <div class="card-header-glass">
+                                <span class="card-tag">Interactive Math 3D</span>
+                                <div class="card-avatars">
+                                    <span class="avatar-dot"></span>
+                                    <span class="avatar-dot"></span>
+                                </div>
+                            </div>
+                            
+                            <!-- Detailed SVG Line Vector Graph -->
+                            <div class="card-graph-placeholder">
+                                <svg class="svg-graph" viewBox="0 0 300 120">
+                                    <defs>
+                                        <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                                            <stop offset="0%" stop-color="#8B5CF6" />
+                                            <stop offset="100%" stop-color="#EC4899" />
+                                        </linearGradient>
+                                        <linearGradient id="lineGrad2" x1="0" y1="0" x2="1" y2="0">
+                                            <stop offset="0%" stop-color="#06B6D4" />
+                                            <stop offset="100%" stop-color="#8B5CF6" />
+                                        </linearGradient>
+                                        <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+                                            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255, 255, 255, 0.03)" stroke-width="1"/>
+                                        </pattern>
+                                    </defs>
+                                    <rect width="100%" height="100%" fill="url(#gridPattern)" />
+                                    <path class="wave-line-1" d="M 0 60 C 50 10, 100 110, 150 60 C 200 10, 250 110, 300 60" fill="none" stroke="url(#lineGrad)" stroke-width="2.5" />
+                                    <path class="wave-line-2" d="M 0 70 C 40 100, 90 20, 140 80 C 190 120, 240 30, 300 70" fill="none" stroke="url(#lineGrad2)" stroke-width="1.5" stroke-dasharray="4 4" opacity="0.6"/>
+                                    <circle cx="150" cy="60" r="5" fill="#EC4899" class="graph-node-pulse" />
+                                    <circle cx="150" cy="60" r="10" fill="none" stroke="#EC4899" stroke-width="1" class="graph-node-ring" />
+                                </svg>
+                            </div>
+                            
+                            <div class="card-meta-glass">
+                                <h3>Quantum Calculus</h3>
+                                <div class="card-meta-details">
+                                    <div class="progress-radial-container">
+                                        <svg class="progress-radial" viewBox="0 0 36 36">
+                                            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="3" />
+                                            <path class="circle-fill" stroke-dasharray="78, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="url(#lineGrad)" stroke-width="3" />
+                                        </svg>
+                                        <span class="radial-text">78%</span>
+                                    </div>
+                                    <div class="progress-details-right">
+                                        <div class="details-row">
+                                            <span class="lbl">Syllabus Node:</span>
+                                            <span class="val glow-cyan">QC-90</span>
+                                        </div>
+                                        <div class="details-row">
+                                            <span class="lbl">Signal Strength:</span>
+                                            <span class="val">98.2%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Overlap Card 1 -->
+                        <div class="glass-card overlay-card-1 float-anim-2 interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="card-header-glass">
+                                <i data-lucide="cpu" class="card-icon-violet"></i>
+                                <span>Neuromorphic Logic</span>
+                            </div>
+                            <div class="card-stat-value">98.5 <span class="unit">FPS</span></div>
+                            <div class="mini-bar-chart">
+                                <span class="bar-chart-item"></span>
+                                <span class="bar-chart-item"></span>
+                                <span class="bar-chart-item"></span>
+                                <span class="bar-chart-item"></span>
+                                <span class="bar-chart-item"></span>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Overlap Card 2 -->
+                        <div class="glass-card overlay-card-2 float-anim-3 interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="card-header-glass">
+                                <i data-lucide="globe" class="card-icon-pink"></i>
+                                <span>Aether Nodes</span>
+                            </div>
+                            <div class="nodes-grid">
+                                <span class="node active"></span>
+                                <span class="node active"></span>
+                                <span class="node active"></span>
+                                <span class="node"></span>
+                                <span class="node active"></span>
+                            </div>
+                            <div class="node-logs-shimmer">
+                                <span>Core node connected...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator">
+                <span class="mouse-icon">
+                    <span class="mouse-wheel"></span>
+                </span>
+                <span class="scroll-text" data-i18n="scroll_down">Scroll Down</span>
+            </div>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="section stats-section" id="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-num" data-count="120">0</div>
+                        <div class="stat-label" data-i18n="stat_1">Ultra-High End Courses</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num" data-count="45">0</div>
+                        <div class="stat-label" data-i18n="stat_2">Cosmos Explorers Joined</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num" data-count="98">0</div>
+                        <div class="stat-label" data-i18n="stat_3">Direct Success Rate</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-num" data-count="24">0</div>
+                        <div class="stat-label" data-i18n="stat_4">Expert Space Mentors</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="section categories-section" id="categories">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tagline" data-i18n="cat_tagline">DISCOVER PATHWAYS</span>
+                    <h2 class="section-title" data-i18n="cat_title">Explore by Premium Academy Categories</h2>
+                    <p class="section-desc" data-i18n="cat_desc">Unlock curated pathways crafted by masterminds to transition your skills into the next technological paradigm.</p>
+                </div>
+
+                <div class="categories-grid">
+                    <!-- Category 1 -->
+                    <div class="category-card reveal-item interactive-card">
+                        <div class="card-border-glow"></div>
+                        <div class="cat-glow"></div>
+                        <div class="cat-icon-container">
+                            <i data-lucide="terminal" class="cat-icon"></i>
+                        </div>
+                        <h3 data-i18n="cat_1_title">Artificial Intelligence & Neural Nets</h3>
+                        <p data-i18n="cat_1_desc">Deep learning models, neural processing architecture, and neuromorphic engineering.</p>
+                        <div class="cat-footer">
+                            <span class="cat-count" data-i18n="cat_placeholders">Placeholders Only</span>
+                            <span class="cat-arrow">→</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 2 -->
+                    <div class="category-card reveal-item interactive-card">
+                        <div class="card-border-glow"></div>
+                        <div class="cat-glow"></div>
+                        <div class="cat-icon-container">
+                            <i data-lucide="palette" class="cat-icon"></i>
+                        </div>
+                        <h3 data-i18n="cat_2_title">Creative Arts & Spatial Designs</h3>
+                        <p data-i18n="cat_2_desc">Cinematic editing, interactive WebGL design, spatial interfaces, and 3D modeling.</p>
+                        <div class="cat-footer">
+                            <span class="cat-count" data-i18n="cat_placeholders">Placeholders Only</span>
+                            <span class="cat-arrow">→</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 3 -->
+                    <div class="category-card reveal-item interactive-card">
+                        <div class="card-border-glow"></div>
+                        <div class="cat-glow"></div>
+                        <div class="cat-icon-container">
+                            <i data-lucide="trending-up" class="cat-icon"></i>
+                        </div>
+                        <h3 data-i18n="cat_3_title">Business Growth & Tokenomics</h3>
+                        <p data-i18n="cat_3_desc">Capital management, startup expansion models, and descentralized economic networks.</p>
+                        <div class="cat-footer">
+                            <span class="cat-count" data-i18n="cat_placeholders">Placeholders Only</span>
+                            <span class="cat-arrow">→</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 4 -->
+                    <div class="category-card reveal-item interactive-card">
+                        <div class="card-border-glow"></div>
+                        <div class="cat-glow"></div>
+                        <div class="cat-icon-container">
+                            <i data-lucide="database" class="cat-icon"></i>
+                        </div>
+                        <h3 data-i18n="cat_4_title">Quantum Data & High Computing</h3>
+                        <p data-i18n="cat_4_desc">Quantum informatics, multi-threaded database systems, and cryptographic integrity.</p>
+                        <div class="cat-footer">
+                            <span class="cat-count" data-i18n="cat_placeholders">Placeholders Only</span>
+                            <span class="cat-arrow">→</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 5 -->
+                    <div class="category-card reveal-item interactive-card">
+                        <div class="card-border-glow"></div>
+                        <div class="cat-glow"></div>
+                        <div class="cat-icon-container">
+                            <i data-lucide="languages" class="cat-icon"></i>
+                        </div>
+                        <h3 data-i18n="cat_5_title">Linguistic Coding & Semantics</h3>
+                        <p data-i18n="cat_5_desc">Advanced lexical analysis, NLP pipelines, and conceptual communications.</p>
+                        <div class="cat-footer">
+                            <span class="cat-count" data-i18n="cat_placeholders">Placeholders Only</span>
+                            <span class="cat-arrow">→</span>
+                        </div>
+                    </div>
+
+                    <!-- Category 6 -->
+                    <div class="category-card reveal-item interactive-card">
+                        <div class="card-border-glow"></div>
+                        <div class="cat-glow"></div>
+                        <div class="cat-icon-container">
+                            <i data-lucide="activity" class="cat-icon"></i>
+                        </div>
+                        <h3 data-i18n="cat_6_title">Bio-Informatics & Genomics</h3>
+                        <p data-i18n="cat_6_desc">Genomic sequencing pipelines, bio-computational modeling, and protein folding.</p>
+                        <div class="cat-footer">
+                            <span class="cat-count" data-i18n="cat_placeholders">Placeholders Only</span>
+                            <span class="cat-arrow">→</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Section (Premium Redesigned) -->
+        <section class="section courses-section" id="courses">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tagline" data-i18n="courses_tagline">TECH SPACE ACADEMY</span>
+                    <h2 class="section-title" data-i18n="courses_title">Professional Foundation Tracks</h2>
+                    <p class="section-desc" data-i18n="courses_desc">Start your educational journey now with the comprehensive tech foundation package at a special limited-time discount.</p>
+                </div>
+
+                <div class="courses-grid">
+                    <!-- Course 1: Programming Foundations -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge" data-i18n="course_discount">50% OFF</span>
+                            <img src="assets/prog_course.png" alt="Programming Foundation" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-violet" data-i18n="course_1_tag">Software Engineering</span>
+                                <div class="course-rating">
+                                    <i data-lucide="star" class="star-fill-small"></i>
+                                    <span>4.9</span>
+                                </div>
+                            </div>
+                            <h3 data-i18n="course_1_title">Comprehensive Programming Foundation</h3>
+                            <p data-i18n="course_1_desc">Start your programming journey from scratch. Learn programming logic, thinking algorithms, and basic data structures with powerful languages like Python and JS.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span data-i18n="course_1_hours">24 Hours</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span data-i18n="course_1_lessons">42 Lessons</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container">
+                                    <span class="old-price">$198</span>
+                                    <span class="new-price glow-cyan">$99</span>
+                                </div>
+                                <a href="course-player.html?course=programming" class="btn btn-primary btn-enroll magnetic" data-i18n="btn_enroll">Enroll Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 2: AI Foundations -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge" data-i18n="course_discount">50% OFF</span>
+                            <img src="assets/ai_course.png" alt="AI Foundation" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-pink" data-i18n="course_2_tag">Artificial Intelligence</span>
+                                <div class="course-rating">
+                                    <i data-lucide="star" class="star-fill-small"></i>
+                                    <span>5.0</span>
+                                </div>
+                            </div>
+                            <h3 data-i18n="course_2_title">Artificial Intelligence Foundation</h3>
+                            <p data-i18n="course_2_desc">Understand the principles of intelligent machines. Explore neural networks, Natural Language Processing (NLP), and deep learning with modern generative models.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span data-i18n="course_2_hours">36 Hours</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span data-i18n="course_2_lessons">58 Lessons</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container">
+                                    <span class="old-price">$298</span>
+                                    <span class="new-price glow-cyan">$149</span>
+                                </div>
+                                <a href="course-player.html?course=ai" class="btn btn-primary btn-enroll magnetic" data-i18n="btn_enroll">Enroll Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 3: Networks Foundations -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge" data-i18n="course_discount">50% OFF</span>
+                            <img src="assets/network_course.png" alt="Network Foundation" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-cyan" data-i18n="course_3_tag">Network Engineering</span>
+                                <div class="course-rating">
+                                    <i data-lucide="star" class="star-fill-small"></i>
+                                    <span>4.8</span>
+                                </div>
+                            </div>
+                            <h3 data-i18n="course_3_title">Computer Networks Foundation</h3>
+                            <p data-i18n="course_3_desc">Learn the architecture of global data transmission. Understand essential web protocols, DNS architecture, cybersecurity principles, and firewall protection.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span data-i18n="course_3_hours">18 Hours</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span data-i18n="course_3_lessons">30 Lessons</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container">
+                                    <span class="old-price">$178</span>
+                                    <span class="new-price glow-cyan">$89</span>
+                                </div>
+                                <a href="course-player.html?course=networks" class="btn btn-primary btn-enroll magnetic" data-i18n="btn_enroll">Enroll Now</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 4: Web Development -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge">50% OFF</span>
+                            <img src="assets/course_webdev.png" alt="Web Development" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-cyan">تطوير الويب</span>
+                                <div class="course-rating"><i data-lucide="star" class="star-fill-small"></i><span>4.9</span></div>
+                            </div>
+                            <h3>تطوير الويب الشامل Full-Stack</h3>
+                            <p>من HTML و CSS إلى React.js و Node.js. ابنِ مواقع وتطبيقات ويب احترافية متكاملة من الصفر.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span>28 ساعة</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span>10 دروس</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container"><span class="old-price">$248</span><span class="new-price glow-cyan">$124</span></div>
+                                <a href="course-player.html?course=webdev" class="btn btn-primary btn-enroll magnetic">سجّل الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 5: Cybersecurity -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge">40% OFF</span>
+                            <img src="assets/course_cybersec.png" alt="Cybersecurity" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-pink">الأمن السيبراني</span>
+                                <div class="course-rating"><i data-lucide="star" class="star-fill-small"></i><span>4.8</span></div>
+                            </div>
+                            <h3>الأمن السيبراني واختبار الاختراق</h3>
+                            <p>حماية الأنظمة والشبكات من الاختراق. تعلم التشفير واختبار الاختراق الأخلاقي والتحقيق الرقمي.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span>22 ساعة</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span>10 دروس</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container"><span class="old-price">$320</span><span class="new-price glow-cyan">$192</span></div>
+                                <a href="course-player.html?course=cybersecurity" class="btn btn-primary btn-enroll magnetic">سجّل الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 6: Mobile Development -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge">50% OFF</span>
+                            <img src="assets/course_mobile.png" alt="Mobile Development" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-violet">تطبيقات الموبايل</span>
+                                <div class="course-rating"><i data-lucide="star" class="star-fill-small"></i><span>4.9</span></div>
+                            </div>
+                            <h3>تطوير تطبيقات الموبايل Flutter</h3>
+                            <p>ابنِ تطبيقات iOS و Android بكود واحد باستخدام Flutter و Dart مع نشرها على المتاجر.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span>30 ساعة</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span>10 دروس</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container"><span class="old-price">$280</span><span class="new-price glow-cyan">$140</span></div>
+                                <a href="course-player.html?course=mobile" class="btn btn-primary btn-enroll magnetic">سجّل الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 7: Database -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge">45% OFF</span>
+                            <img src="assets/course_database.png" alt="Database Systems" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-cyan">قواعد البيانات</span>
+                                <div class="course-rating"><i data-lucide="star" class="star-fill-small"></i><span>4.7</span></div>
+                            </div>
+                            <h3>قواعد البيانات الاحترافية SQL & NoSQL</h3>
+                            <p>إتقان MySQL و PostgreSQL و MongoDB. من التصميم إلى التحسين والنسخ الاحتياطي والأمان.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span>20 ساعة</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span>10 دروس</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container"><span class="old-price">$220</span><span class="new-price glow-cyan">$121</span></div>
+                                <a href="course-player.html?course=database" class="btn btn-primary btn-enroll magnetic">سجّل الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 8: Cloud Computing -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge">50% OFF</span>
+                            <img src="assets/course_cloud.png" alt="Cloud Computing" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-pink">الحوسبة السحابية</span>
+                                <div class="course-rating"><i data-lucide="star" class="star-fill-small"></i><span>4.8</span></div>
+                            </div>
+                            <h3>الحوسبة السحابية AWS & Azure & GCP</h3>
+                            <p>تعلم خدمات أمازون ومايكروسوفت وجوجل السحابية. Docker و Kubernetes و Serverless.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span>26 ساعة</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span>10 دروس</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container"><span class="old-price">$350</span><span class="new-price glow-cyan">$175</span></div>
+                                <a href="course-player.html?course=cloud" class="btn btn-primary btn-enroll magnetic">سجّل الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 9: Data Science -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge">40% OFF</span>
+                            <img src="assets/course_datascience.png" alt="Data Science" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-violet">علم البيانات</span>
+                                <div class="course-rating"><i data-lucide="star" class="star-fill-small"></i><span>5.0</span></div>
+                            </div>
+                            <h3>علم البيانات والتحليل Data Science</h3>
+                            <p>Python و Pandas و Machine Learning. حلل البيانات وابنِ نماذج تعلم آلي احترافية.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span>32 ساعة</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span>10 دروس</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container"><span class="old-price">$290</span><span class="new-price glow-cyan">$174</span></div>
+                                <a href="course-player.html?course=datascience" class="btn btn-primary btn-enroll magnetic">سجّل الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 10: Linux -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge">50% OFF</span>
+                            <img src="assets/course_linux.png" alt="Linux Administration" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-cyan">إدارة الأنظمة</span>
+                                <div class="course-rating"><i data-lucide="star" class="star-fill-small"></i><span>4.9</span></div>
+                            </div>
+                            <h3>إدارة نظام لينكس من الصفر للاحتراف</h3>
+                            <p>Terminal و Bash Scripting وإدارة الخوادم. استعد لشهادة LPIC الاحترافية.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span>22 ساعة</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span>10 دروس</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container"><span class="old-price">$200</span><span class="new-price glow-cyan">$100</span></div>
+                                <a href="course-player.html?course=linux" class="btn btn-primary btn-enroll magnetic">سجّل الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 11: Python -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge">45% OFF</span>
+                            <img src="assets/course_python.png" alt="Python Programming" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-pink">بايثون</span>
+                                <div class="course-rating"><i data-lucide="star" class="star-fill-small"></i><span>5.0</span></div>
+                            </div>
+                            <h3>برمجة بايثون الشاملة Python</h3>
+                            <p>اللغة الأكثر طلباً في العالم. من المتغيرات إلى OOP والمشاريع العملية المتقدمة.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span>25 ساعة</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span>10 دروس</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container"><span class="old-price">$240</span><span class="new-price glow-cyan">$132</span></div>
+                                <a href="course-player.html?course=python" class="btn btn-primary btn-enroll magnetic">سجّل الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 12: UI/UX Design -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge">50% OFF</span>
+                            <img src="assets/course_uiux.png" alt="UI/UX Design" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-violet">تصميم UI/UX</span>
+                                <div class="course-rating"><i data-lucide="star" class="star-fill-small"></i><span>4.8</span></div>
+                            </div>
+                            <h3>تصميم واجهات المستخدم UI/UX بـ Figma</h3>
+                            <p>من البحث إلى التصميم النهائي. Wireframes و Prototypes و Design Systems الاحترافية.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span>20 ساعة</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span>10 دروس</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container"><span class="old-price">$260</span><span class="new-price glow-cyan">$130</span></div>
+                                <a href="course-player.html?course=uiux" class="btn btn-primary btn-enroll magnetic">سجّل الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course 13: DevOps -->
+                    <div class="course-card reveal-item interactive-card tilt-card">
+                        <div class="card-border-glow"></div>
+                        <div class="course-image-container">
+                            <span class="discount-badge">40% OFF</span>
+                            <img src="assets/course_devops.png" alt="DevOps" class="course-image">
+                            <div class="image-overlay-gradient"></div>
+                        </div>
+                        <div class="course-content">
+                            <div class="course-header-meta">
+                                <span class="shimmer-pill glow-cyan">DevOps</span>
+                                <div class="course-rating"><i data-lucide="star" class="star-fill-small"></i><span>4.9</span></div>
+                            </div>
+                            <h3>DevOps والأتمتة من الصفر</h3>
+                            <p>Git و Docker و Kubernetes و CI/CD. أتمتة البناء والنشر ومراقبة الأداء.</p>
+                            <div class="course-info-footer">
+                                <div class="info-item"><i data-lucide="clock" class="info-icon"></i> <span>28 ساعة</span></div>
+                                <div class="info-item"><i data-lucide="book-open" class="info-icon"></i> <span>10 دروس</span></div>
+                            </div>
+                            <div class="course-pricing-row">
+                                <div class="price-container"><span class="old-price">$300</span><span class="new-price glow-cyan">$180</span></div>
+                                <a href="course-player.html?course=devops" class="btn btn-primary btn-enroll magnetic">سجّل الآن</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="courses-bottom-action">
+                    <p class="action-alert-text" data-i18n="courses_alert">The 50% discount offer is valid for a limited time. Register now to secure your seat in the upcoming batch.</p>
+                    <button class="btn btn-secondary pulse-glow-btn" data-i18n="courses_action_btn">Get the Full Package</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section testimonials-section" id="testimonials">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="section-header">
+                        <span class="section-tagline" data-i18n="test_tagline">FEEDBACK HARMONICS</span>
+                        <h2 class="section-title" data-i18n="test_title">Cosmos Traveler Insights</h2>
+                        <p class="section-desc" data-i18n="test_desc">Read the experience profiles recorded from our alpha testers who completed courses simulations.</p>
+                    </div>
+                </div>
+
+                <!-- Horizontal Marquee Track 1 (Left to Right) -->
+                <div class="marquee-wrapper">
+                    <div class="marquee-track align-left">
+                        <!-- Card 1 -->
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-1"></div>
+                                <div class="user-info">
+                                    <h4>Alesha Vance</h4>
+                                    <span>AI Integrator</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"The interactive 3D simulations allowed me to understand neural nodes immediately. Truly world-class platform."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-2"></div>
+                                <div class="user-info">
+                                    <h4>Dr. Marcus Sterling</h4>
+                                    <span>Genetics Lead</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"High-end visual structure. Spacing and dynamic animations make learning a premium game. Brilliant execution."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-3"></div>
+                                <div class="user-info">
+                                    <h4>Seline K.</h4>
+                                    <span>3D UI Designer</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"The glassmorphic elements are not just decoration, they elevate visual hierarchy. Apple-level micro-interactions."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+
+                        <!-- Duplicate Cards for Infinite Scrolling Loop -->
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-1"></div>
+                                <div class="user-info">
+                                    <h4>Alesha Vance</h4>
+                                    <span>AI Integrator</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"The interactive 3D simulations allowed me to understand neural nodes immediately. Truly world-class platform."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-2"></div>
+                                <div class="user-info">
+                                    <h4>Dr. Marcus Sterling</h4>
+                                    <span>Genetics Lead</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"High-end visual structure. Spacing and dynamic animations make learning a premium game. Brilliant execution."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-3"></div>
+                                <div class="user-info">
+                                    <h4>Seline K.</h4>
+                                    <span>3D UI Designer</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"The glassmorphic elements are not just decoration, they elevate visual hierarchy. Apple-level micro-interactions."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Horizontal Marquee Track 2 (Right to Left) -->
+                <div class="marquee-wrapper mt-4">
+                    <div class="marquee-track align-right">
+                        <!-- Card 4 -->
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-4"></div>
+                                <div class="user-info">
+                                    <h4>Nate Sterling</h4>
+                                    <span>Core Engineer</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"Unmatched load speeds. Even with complex particle clouds, the engine stays smooth. Spacing is extremely comfortable."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-5"></div>
+                                <div class="user-info">
+                                    <h4>Julia Chen</h4>
+                                    <span>Startup Founder</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"Brings Dribbble designs to life in a functional, responsive platform. Aether is the standard for high-end SaaS education."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+
+                        <!-- Card 6 -->
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-6"></div>
+                                <div class="user-info">
+                                    <h4>Oliver Vance</h4>
+                                    <span>Physics Researcher</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"Visual layout mirrors the physics concepts. Spasial models in Three.js react perfectly to user scrolling."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+
+                        <!-- Duplicate Cards for Infinite Scrolling Loop -->
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-4"></div>
+                                <div class="user-info">
+                                    <h4>Nate Sterling</h4>
+                                    <span>Core Engineer</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"Unmatched load speeds. Even with complex particle clouds, the engine stays smooth. Spacing is extremely comfortable."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-5"></div>
+                                <div class="user-info">
+                                    <h4>Julia Chen</h4>
+                                    <span>Startup Founder</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"Brings Dribbble designs to life in a functional, responsive platform. Aether is the standard for high-end SaaS education."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card interactive-card">
+                            <div class="card-border-glow"></div>
+                            <div class="test-user">
+                                <div class="user-avatar val-6"></div>
+                                <div class="user-info">
+                                    <h4>Oliver Vance</h4>
+                                    <span>Physics Researcher</span>
+                                </div>
+                            </div>
+                            <p class="test-body">"Visual layout mirrors the physics concepts. Spasial models in Three.js react perfectly to user scrolling."</p>
+                            <div class="test-rating">
+                                <i data-lucide="star" class="star-fill"></i>5.0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="section faq-section" id="faq">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tagline" data-i18n="faq_tagline">DECRYPTER SYSTEM</span>
+                    <h2 class="section-title" data-i18n="faq_title">Frequently Asked Questions</h2>
+                    <p class="section-desc" data-i18n="faq_desc">Browse core information regarding space node licensing, academy systems, and learning paths.</p>
+                </div>
+
+                <div class="faq-accordion-list">
+                    <!-- FAQ 1 -->
+                    <div class="faq-item reveal-item">
+                        <button class="faq-question">
+                            <span data-i18n="faq_1_q">How do I unlock interactive learning paths?</span>
+                            <span class="faq-toggle-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner" data-i18n="faq_1_a">
+                                Once the syllabus node is finalized, travelers can register an Aether account, execute a node connection, and immediately gain access to real-time interactive sandboxes directly in the web browser.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="faq-item reveal-item">
+                        <button class="faq-question">
+                            <span data-i18n="faq_2_q">Are these certificates accredited globally?</span>
+                            <span class="faq-toggle-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner" data-i18n="faq_2_a">
+                                Yes. Every academy track has a unique cryptographic hash registered on our validation matrix, confirming curriculum completion and technical mastery to global enterprises.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="faq-item reveal-item">
+                        <button class="faq-question">
+                            <span data-i18n="faq_3_q">Can I learn at my own speed?</span>
+                            <span class="faq-toggle-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner" data-i18n="faq_3_a">
+                                Absolutely. The platform utilizes custom learning states saved directly to your profile. Explore advanced models or repeat modules as many times as necessary with 24/7 server access.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="faq-item reveal-item">
+                        <button class="faq-question">
+                            <span data-i18n="faq_4_q">What hardware is required for the 3D visual environments?</span>
+                            <span class="faq-toggle-icon">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-inner" data-i18n="faq_4_a">
+                                No specialized hardware is required. The rendering pipeline is highly optimized via WebGL/Three.js to ensure standard laptops, smartphones, and tablets run simulations smoothly at 60 FPS.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter CTA -->
+        <section class="section newsletter-section">
+            <div class="container">
+                <div class="newsletter-card interactive-card">
+                    <div class="card-border-glow"></div>
+                    <div class="newsletter-glow"></div>
+                    <h2 data-i18n="news_title">Initialize Your Quantum Ascent</h2>
+                    <p data-i18n="news_desc">Enter your transmission coordinates to receive priority invitations for next-generation course cohorts.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault();">
+                        <div class="input-glow-wrapper">
+                            <input type="email" placeholder="name@domain.com" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large magnetic">
+                            <span data-i18n="news_btn">Transmit Core</span>
+                            <span class="btn-glow"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <i data-lucide="graduation-cap" class="logo-symbol"></i>
+                        <span class="logo-text">ET3ALAMT</span>
+                    </a>
+                    <p class="footer-brand-text" data-i18n="footer_brand">
+                        Pioneering the next era of tech-driven learning. Immersive environments, verified masteries, unlimited potential.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                        <a href="#" class="social-icon" aria-label="GitHub"><i data-lucide="github"></i></a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                        <a href="#" class="social-icon" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links-column">
+                    <h4 data-i18n="footer_col_1_title">COSMOS PATHS</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footer_col_1_1">Neural Learning</a></li>
+                        <li><a href="#" data-i18n="footer_col_1_2">Quantum Dev</a></li>
+                        <li><a href="#" data-i18n="footer_col_1_3">Tokenomics</a></li>
+                        <li><a href="#" data-i18n="footer_col_1_4">Visual Designs</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-column">
+                    <h4 data-i18n="footer_col_2_title">SYSTEM CORE</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footer_col_2_1">Syllabus Network</a></li>
+                        <li><a href="#" data-i18n="footer_col_2_2">Interactive Labs</a></li>
+                        <li><a href="#" data-i18n="footer_col_2_3">Validation Keys</a></li>
+                        <li><a href="#" data-i18n="footer_col_2_4">Server Status</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links-column">
+                    <h4 data-i18n="footer_col_3_title">ACADEMY INFO</h4>
+                    <ul>
+                        <li><a href="#" data-i18n="footer_col_3_1">Travel Log</a></li>
+                        <li><a href="#" data-i18n="footer_col_3_2">Research Labs</a></li>
+                        <li><a href="#" data-i18n="footer_col_3_3">Documentation</a></li>
+                        <li><a href="#" data-i18n="footer_col_3_4">Core Licensing</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p data-i18n="footer_copy">&copy; 2026 Aether Academy. All simulated interfaces reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="#" data-i18n="footer_bot_1">Data Privacy</a>
+                    <a href="#" data-i18n="footer_bot_2">Node Terms</a>
+                    <a href="#" data-i18n="footer_bot_3">System Integrity</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Premium Checkout Modal (Hidden by default) -->
+    <div class="modal-overlay" id="payment-modal">
+        <div class="premium-checkout-modal">
+            <button class="modal-close-btn" id="btn-close-payment">
+                <i data-lucide="x"></i>
+            </button>
+            
+            <!-- Header Section -->
+            <div class="checkout-header">
+                <div class="offer-badge-wrapper">
+                    <span class="offer-badge">🔥 عرض حصري لفترة محدودة</span>
+                </div>
+                <h3 class="checkout-title">الوصول الشامل لجميع المسارات</h3>
+                <div class="price-showcase">
+                    <span class="currency">$</span>
+                    <span class="amount">3</span>
+                    <span class="local-price">فقط (150 ج.م) مدى الحياة</span>
+                </div>
+            </div>
+
+            <!-- Payment Flow Section -->
+            <div class="checkout-flow">
+                <p class="flow-title">طرق الدفع المتاحة للتحويل:</p>
+                
+                <div class="payment-methods-grid">
+                    <div class="method-card">
+                        <div class="method-icon vf-icon"><i data-lucide="smartphone"></i></div>
+                        <span>فودافون كاش</span>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-icon insta-icon"><i data-lucide="zap"></i></div>
+                        <span>إنستاباي</span>
+                    </div>
+                </div>
+
+                <div class="number-display-box">
+                    <div class="number-glow-bg"></div>
+                    <div class="number-content-wrapper">
+                        <span class="payment-number" id="pay-number">01093922945</span>
+                        <button class="btn-copy-premium" id="btn-copy-num">
+                            <i data-lucide="copy" style="width: 18px; height: 18px;"></i> <span>نسخ الرقم</span>
+                        </button>
+                    </div>
+                    <div class="copy-success-tooltip" id="copy-success-msg">تم النسخ!</div>
+                </div>
+
+                <div class="steps-timeline">
+                    <div class="step-line"></div>
+                    <div class="step-item">
+                        <div class="step-dot"><i data-lucide="check"></i></div>
+                        <div class="step-text">أتمم عملية التحويل بقيمة (150 ج.م)</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-dot"><i data-lucide="camera"></i></div>
+                        <div class="step-text">التقط صورة (Screenshot) للإيصال بنجاح</div>
+                    </div>
+                </div>
+
+                <div class="verify-payment-section" id="verify-section" style="margin-top: 1.5rem;">
+                    <p style="font-size: 0.95rem; color: #a78bfa; margin-bottom: 12px; font-weight: 600;">أدخل الرقم الذي قمت بالتحويل منه للتأكيد:</p>
+                    <div style="display: flex; gap: 10px; flex-direction: column;">
+                        <input type="text" id="sender-phone" placeholder="مثال: 01012345678" style="padding: 14px; border-radius: 12px; background: rgba(0,0,0,0.5); border: 1px solid rgba(139, 92, 246, 0.4); color: white; font-size: 1.1rem; text-align: center; font-family: 'Inter', monospace; outline: none; transition: all 0.3s;">
+                        <button id="btn-verify-payment" class="btn btn-whatsapp-premium magnetic" style="width: 100%; justify-content: center;">
+                            <div class="wa-shine"></div>
+                            <i data-lucide="check-circle" class="wa-icon"></i>
+                            <span>تأكيد عملية الدفع</span>
+                        </button>
+                    </div>
+                    <div id="payment-status-message" style="margin-top: 15px; text-align: center; display: none; font-weight: 700; font-size: 1rem;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Three.js (3D Graphics Engine) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <!-- GSAP (GreenSock Animation Platform) & ScrollTrigger Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lucide Icons (Specific version to support brand icons like Twitter/GitHub) -->
+    <script src="https://unpkg.com/lucide@0.292.0"></script>
+
+    <!-- Firebase App & Auth compat JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+    <!-- Core Javascript logic -->
+    <script src="app.js?v=5"></script>
+
+</body>
+</html>
