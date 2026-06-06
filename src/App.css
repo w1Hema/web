@@ -1,0 +1,19 @@
+/* App.css cleared to prevent styling conflicts. All premium styles are defined in index.css. */
+.grid-responsive {
+  display: grid;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  .grid-responsive {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
