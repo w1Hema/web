@@ -4,6 +4,8 @@ import {
   Atom, Sparkles, GraduationCap, Calculator, Compass, Brain, Send, X, MessageSquare, ArrowLeft, ArrowRight, Trophy, Clock, Menu, Download, Smartphone,
   Code, Terminal, Mail, Phone, Cpu, Globe, MessageCircle, MapPin
 } from 'lucide-react';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from './firebase';
 
 const snowflakesList = Array.from({ length: 20 }, (_, i) => ({
   id: i,
@@ -33,11 +35,14 @@ export default function App() {
   const [examResult, setExamResult] = useState(null);
   const [examScore, setExamScore] = useState(0);
 
-  const examQuestions = [
-    { q: "ما هو الهدف الرئيسي من هذه الحصة؟", options: ["فهم الأساسيات والتطبيق عليها", "حفظ القوانين فقط بدون فهم", "تخطي الفيديوهات والاعتماد على الملخصات", "لا شيء مما سبق"], answer: 0 },
-    { q: "أي من التالي يعتبر التطبيق العملي الأفضل للدرس للحصول على الدرجة النهائية؟", options: ["قراءة الدرس فقط قبل الامتحان", "حل التمارين بيدك ومراجعة الأخطاء", "مشاهدة الفيديو مرة أخرى بدون تطبيق", "حفظ الأسئلة الشائعة فقط"], answer: 1 },
-    { q: "لضمان الدرجة النهائية يجب عليك:", options: ["التركيز في التكات والأسئلة غير النمطية", "تجاهل الأسئلة الصعبة التي لم تأت من قبل", "تأجيل المذاكرة لليلة الامتحان", "حضور الحصة دون مراجعتها"], answer: 0 }
-  ];
+  const [examQuestions] = useState(() => {
+    const saved = localStorage.getItem('exam_questions');
+    return saved ? JSON.parse(saved) : [
+      { q: "ما هو الهدف الرئيسي من هذه الحصة؟", options: ["فهم الأساسيات والتطبيق عليها", "حفظ القوانين فقط بدون فهم", "تخطي الفيديوهات والاعتماد على الملخصات", "لا شيء مما سبق"], answer: 0 },
+      { q: "أي من التالي يعتبر التطبيق العملي الأفضل للدرس للحصول على الدرجة النهائية؟", options: ["قراءة الدرس فقط قبل الامتحان", "حل التمارين بيدك ومراجعة الأخطاء", "مشاهدة الفيديو مرة أخرى بدون تطبيق", "حفظ الأسئلة الشائعة فقط"], answer: 1 },
+      { q: "لضمان الدرجة النهائية يجب عليك:", options: ["التركيز في التكات والأسئلة غير النمطية", "تجاهل الأسئلة الصعبة التي لم تأت من قبل", "تأجيل المذاكرة لليلة الامتحان", "حضور الحصة دون مراجعتها"], answer: 0 }
+    ];
+  });
 
   const subjects = [
     { id: 'arabic', name: 'اللغة العربية', icon: 'BookOpen', color: '#3b82f6', description: 'النحو، النصوص، القراءة، والقصة' },
@@ -141,13 +146,32 @@ export default function App() {
   // Honor Roll Leaderboard Search
   // ----------------------------------------------------
   const [searchStudent, setSearchStudent] = useState('');
-  const studentsHonor = [
-    { rank: 1, name: 'عمر أحمد محمود', grade: 'الثالث الثانوي', score: '99.5%', xp: 2450, badge: 'ملك الفيزياء 👑' },
-    { rank: 2, name: 'سارة محمد علي', grade: 'الثالث الإعدادي', score: '98.8%', xp: 2180, badge: 'بطلة الرياضيات 📐' },
-    { rank: 3, name: 'عبد الرحمن حسن', grade: 'الثاني الثانوي', score: '98.2%', xp: 1920, badge: 'المثابر المتميز 🧪' },
-    { rank: 4, name: 'فاطمة إبراهيم سعيد', grade: 'الأول الثانوي', score: '97.9%', xp: 1750, badge: 'شعلة العلوم 🧬' },
-    { rank: 5, name: 'محمد مصطفى كامل', grade: 'الثالث الإعدادي', score: '97.4%', xp: 1650, badge: 'قارئ القمة 📖' },
-  ];
+  const [studentsHonor, setStudentsHonor] = useState([]);
+
+  useEffect(() => {
+    const fetchStudents = async () => {
+      try {
+        const q = query(collection(db, "students"));
+        const snapshot = await getDocs(q);
+        const list = [];
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          list.push({
+            rank: list.length + 1,
+            name: data.name || 'بدون اسم',
+            grade: data.stage === 'sec3' ? 'الثالث الثانوي' : data.stage === 'prep3' ? 'الثالث الإعدادي' : 'طالب قمة',
+            score: '100%',
+            xp: Math.floor(Math.random() * 1000) + 1000,
+            badge: 'بطل القمة 👑'
+          });
+        });
+        setStudentsHonor(list);
+      } catch(err) {
+        console.error("Error fetching students:", err);
+      }
+    };
+    fetchStudents();
+  }, []);
 
   const filteredStudents = studentsHonor.filter(s => 
     s.name.includes(searchStudent) || s.grade.includes(searchStudent) || s.badge.includes(searchStudent)
@@ -213,7 +237,7 @@ export default function App() {
         {/* Logo and branding area */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', flexShrink: 0 }} onClick={() => setView('home')}>
           <div className="logo-frame">
-            <img src="/logo.png" alt="سنتر القمة" style={{ width: '85%', height: '85%', objectFit: 'contain' }} />
+            <img src="./logo.png" alt="سنتر القمة" style={{ width: '85%', height: '85%', objectFit: 'contain' }} />
           </div>
           <span className="logo-text-brand" style={{ whiteSpace: 'nowrap' }}>سنتر القمة</span>
         </div>
@@ -318,7 +342,7 @@ export default function App() {
                     حمل البرنامج التعليمي الخاص بطلاب السنتر الآن
                   </div>
                   <div className="app-download-buttons">
-                    <a href="/elqema-app.apk" download className="golden-download-btn">
+                    <a href="https://www.mediafire.com/file/trm0sfkrv91bq5t/app-debug.apk/file" target="_blank" rel="noopener noreferrer" className="golden-download-btn">
                       <div className="btn-icon">
                         <Download size={22} />
                       </div>
@@ -348,7 +372,7 @@ export default function App() {
 
                 {/* The transparent teachers image floating */}
                 <div className="animate-float" style={{ position: 'relative', width: '100%', height: '100%', zIndex: 2, display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
-                  <img src="/teachers-group.png" alt="نخبة أساتذة القمة" style={{ 
+                  <img src="./teachers-group.png" alt="نخبة أساتذة القمة" style={{ 
                     height: '100%', maxWidth: '100%', objectFit: 'contain', 
                     filter: 'drop-shadow(0 25px 35px rgba(0,0,0,0.35))',
                     transformOrigin: 'bottom center', transform: 'scale(1.25)'
@@ -769,18 +793,38 @@ export default function App() {
                 <p>أدخل بياناتك لفتح قسم الفيديوهات التعليمية</p>
               </div>
               
-              <form className="login-form" onSubmit={(e) => { 
+              <form className="login-form" onSubmit={async (e) => { 
                 e.preventDefault(); 
-                setIsLoggedIn(true); 
-                if (rememberMe) {
-                  localStorage.setItem('isLoggedIn', 'true');
+                const nameInput = e.target.studentName.value.trim();
+                const codeInput = e.target.studentCode.value.trim();
+                const stageInput = e.target.studentStage.value;
+
+                try {
+                  const q = query(collection(db, "students"), where("code", "==", codeInput), where("name", "==", nameInput));
+                  const snap = await getDocs(q);
+                  
+                  if (snap.empty) {
+                    alert('اسم الطالب أو كود السنتر غير صحيح! تأكد من إضافتك عبر تطبيق الإدارة.');
+                    return;
+                  }
+                  
+                  setIsLoggedIn(true); 
+                  if (rememberMe) {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('studentName', nameInput);
+                    localStorage.setItem('studentCode', codeInput);
+                    localStorage.setItem('studentStage', stageInput);
+                  }
+                  setView('dashboard'); 
+                } catch (error) {
+                  console.error("Login error", error);
+                  alert("حدث خطأ في الاتصال بقاعدة البيانات.");
                 }
-                setView('dashboard'); 
               }}>
                 <div className="input-group">
                   <label>اسم الطالب (ثلاثي)</label>
                   <div className="input-wrapper">
-                    <input type="text" placeholder="أدخل اسمك بالكامل..." required />
+                    <input type="text" name="studentName" placeholder="أدخل اسمك بالكامل..." required />
                     <Users size={20} className="input-icon" />
                   </div>
                 </div>
@@ -788,7 +832,7 @@ export default function App() {
                 <div className="input-group">
                   <label>كود السنتر</label>
                   <div className="input-wrapper">
-                    <input type="text" placeholder="أدخل الكود الخاص بك..." required />
+                    <input type="text" name="studentCode" placeholder="أدخل الكود الخاص بك..." required />
                     <Shield size={20} className="input-icon" />
                   </div>
                 </div>
@@ -796,7 +840,7 @@ export default function App() {
                 <div className="input-group">
                   <label>المرحلة الدراسية</label>
                   <div className="input-wrapper">
-                    <select required className="custom-select" defaultValue="">
+                    <select required name="studentStage" className="custom-select" defaultValue="">
                       <option value="" disabled>اختر صفك الدراسي...</option>
                       <option value="prep1">الصف الأول الإعدادي</option>
                       <option value="prep2">الصف الثاني الإعدادي</option>
